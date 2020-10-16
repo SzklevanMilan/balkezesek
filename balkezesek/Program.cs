@@ -22,19 +22,17 @@ namespace balkezesek
             }
             sr.Close();
         }
-
         static void Harmadik()
         {
             Console.WriteLine("3.feladat: {0}",lista.Count());
         }
-
         static void Negyedik()
         {
             foreach (var l in lista)
             {
                 if (l.Utolso.Contains("1999-10"))
-                {
-                    Console.WriteLine($"\t{l.Nev}, {l.Magassag*2.54}cm");
+                { 
+                    Console.WriteLine($"\t{l.Nev}, {Math.Round(l.Magassag*2.54),1:N1}cm");
                 }
             }
         }
@@ -45,22 +43,29 @@ namespace balkezesek
                 Console.WriteLine("Írjon be egy évszámot 1990 és 1999 között!");
                 be = Convert.ToInt32(Console.ReadLine());
                 if (be >= 1990 && be <= 1999)
-                {
-                    Console.WriteLine("Jó számot adott meg.");
+                { 
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Hibás adat,kérek egy 1990 és 1999 közötti évszámot.");
+                    Console.WriteLine("Hibás adat! Kérek egy 1990 és 1999 közötti számot.");
                 }
             }
         }
         static void Hatodik()
         {
+            double suly = 0;
+            double  db = 0;
             foreach (var i in lista)
             {
-
+                if (be>=int.Parse(i.Elso.Substring(0,4)) && be<= int.Parse(i.Utolso.Substring(0, 4))) 
+                {
+                    suly = suly + i.Suly;
+                    db++;
+                }
             }
+            double atlag = Math.Round(suly / db,2);
+            Console.WriteLine($"6.feladat: {atlag} font");
         }
 
         static void Main(string[] args)
@@ -72,7 +77,6 @@ namespace balkezesek
             Negyedik();
             Console.WriteLine("5.feladat:");
             Otodik();
-            Console.WriteLine("6.feladat:");
             Hatodik();
             Console.ReadLine();
         }
