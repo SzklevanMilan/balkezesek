@@ -67,6 +67,25 @@ namespace balkezesek
             double atlag = Math.Round(suly / db,2);
             Console.WriteLine($"6.feladat: {atlag} font");
         }
+        static void Bonusz()
+        {
+            var nevek = from l in lista
+                        select l.Nev;
+            var nevLista = nevek.ToList();
+            var kezdoBetu = from b in nevLista
+                            orderby b
+                            where b[0] != 'R'
+                            group b by b[0] into tempNevek
+                            select tempNevek;
+            foreach (var csoport in kezdoBetu)
+            {
+                Console.WriteLine("kezdőbetű: {0} ",csoport.Key);
+                foreach (var tag in csoport)
+                {
+                    Console.WriteLine($"\t{tag}");
+                }
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -78,6 +97,7 @@ namespace balkezesek
             Console.WriteLine("5.feladat:");
             Otodik();
             Hatodik();
+            Bonusz();
             Console.ReadLine();
         }
     }
